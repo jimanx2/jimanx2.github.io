@@ -48,10 +48,11 @@ table {
 
 /* LAYOUT STYLES */
 body {
+	background: transparent url(../images/bg-left.jpg) -20% 10% no-repeat;
+	background-attachment: fixed;
   font-size: 1em;
   line-height: 1.5; 
-  background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
-  font-family: 'kenvector-thin', Helvetica, Arial, serif;
+  font-family: 'istokweb', Helvetica, Arial, serif;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   color: #6d6d6d;
 }
@@ -69,7 +70,7 @@ header {
 }
 
 header h1 {
-  font-family: 'kenvector-thin'; font-weight: 900;
+  font-family: 'istokweb'; font-weight: 900;
   letter-spacing: -1px;
   font-size: 48px;
   color: #303030;
@@ -85,8 +86,9 @@ header h2 {
 }
 
 #container {
-  background: transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat;
-  min-height: 595px;
+  background: transparent url(../images/bg-right.jpg) 120% 10% no-repeat;
+	background-attachment: fixed;
+  min-height: 700px;
 }
 
 .inner {
@@ -275,8 +277,8 @@ h6 {
 } 
 
 p {
-	font-family: 'Helvetica', sans-serif;
-  font-weight: 300;
+	font-family: 'lora', serif;
+  font-weight: 100;
   margin-bottom: 20px;
 }
  

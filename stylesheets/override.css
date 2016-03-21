@@ -1,24 +1,30 @@
 @font-face {
-    font-family: 'kenvector';
-    src: url(../fonts/kenvector_future.ttf);
+    font-family: 'istokweb';
+    src: url(../fonts/IstokWeb-Regular.ttf);
 }
 @font-face {
-    font-family: 'kenvector-thin';
-    src: url(../fonts/kenvector_future_thin.ttf);
+    font-family: 'lora';
+    src: url(../fonts/Lora-Regular.ttf);
 }
 
 footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
 	background-position: center top;
 	text-align: center;
 }
 
-header { 
+hr {
 	padding-bottom: 0;
 }
+
 header h1, header h2 {
 	text-align: center;
+}
+
+.blog .blog-entry {
+	background: white;
+	border: solid thin #CCC;
+	border-radius: 5px;
+	padding: 20px;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
 }
