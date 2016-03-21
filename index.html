@@ -12,7 +12,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 		
-    <title>Jimanx2.github.io by jimanx2</title>
+    <title ng-bind-html="title">JimanX2 - Loading</title>
 		<style>
 			.selectize-control {
 				display: inline-block;
@@ -23,26 +23,26 @@
 		</style>
   </head>
 
-  <body ng-controller="ContentCtrl as ctn">
+  <body ng-class="accent" ng-controller="ContentCtrl as ctn">
     <div id="container">
       <div class="inner">
 
         <header>
           <h1>Jiman&apos;s</h1>
 					<h2>
-						journey of learning to 
-						<selectize config='ctn.myConfig' options='ctn.myOptions' ng-model="ctn.myModel"></selectize>
+						journey of learning  
+						<selectize config='sectionConfig' options='sectionOptions' ng-model="section"></selectize>
 					</h2>
         </header>
 
-        <hr>
-
-        <section id="main_content">
+        <section id="main_content" class="blog">
 					<ng-view></ng-view>
         </section>
 
         <footer>
-          Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>. Modified by <a href="http://www.facebook.com/silentcoder89">Haziman Hashim</a>
+					<div>
+						Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>. Modified by <a href="http://www.facebook.com/silentcoder89">Haziman Hashim</a>
+					</div>
         </footer>
 
       </div>
@@ -54,7 +54,10 @@
 		<script type="text/javascript" src="javascripts/main.js"></script>
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 		<script type="text/javascript" src="bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+		
+		
 		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 		<script type="text/javascript" src="bower_components/angular-selectize2/dist/angular-selectize.js"></script>
+		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
   </body>
 </html>
