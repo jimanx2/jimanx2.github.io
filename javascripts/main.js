@@ -10,21 +10,17 @@ $(function(){
 	
 	app.config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.
-			when('/start', {
-        templateUrl: 'partials/general.html',
+    $routeProvider
+      .when('/:cat', {
+        templateUrl: 'partials/blog-list.html',
+        controller: 'BlogListCtrl'
+      })
+			.when('/:cat/:file', {
+        templateUrl: 'partials/blog.html',
         controller: 'BlogCtrl'
-      }).
-      when('/rubyonrails', {
-        templateUrl: 'partials/general.html',
-        controller: 'BlogCtrl'
-      }).
-			when('/nodejs', {
-        templateUrl: 'partials/general.html',
-        controller: 'BlogCtrl'
-      }).
-      otherwise({
-        redirectTo: '/start'
+      })
+      .otherwise({
+        redirectTo: '/nodejs'
       });
   }]);
 	
@@ -42,17 +38,16 @@ $(function(){
 	app.controller("ContentCtrl", ['$rootScope', '$location', '$scope', '$socketIo',
 	function($rootScope, $location, $scope, $socketIo){
 		
-		$rootScope.defaultSection = {id: 1, href: 'start', title: "General"}
-		$rootScope.sectionHref = $rootScope.defaultSection.href;
-		$rootScope.sectionTitle = $rootScope.defaultSection.title;
-		$rootScope.sectionOptions = [ $rootScope.defaultSection ];
+		$rootScope.sectionHref = null;
+		$rootScope.sectionTitle = null;
+		$rootScope.sectionOptions = [];
 		
 		$scope.$on('socket:connected', function(){
 			$socketIo.emit('get-list');
 		});
 		
 		$socketIo.on('list', function( data ){
-			$rootScope.sectionOptions = [$rootScope.defaultSection].concat(data.sectionOptions);
+			$rootScope.sectionOptions = data.sectionOptions;
 			locChg();
 		});
 		
@@ -81,13 +76,13 @@ $(function(){
 		
 	}]);
 	
-	app.controller("BlogCtrl", ['$rootScope', '$scope', '$sce', '$socketIo', '$timeout',
+	app.controller("BlogListCtrl", ['$rootScope', '$scope', '$sce', '$socketIo', '$timeout',
 	function($root, $scope, $sce, $socketIo, $timeout){
 		var emitGet;
 		$scope.blogList = [];
 		$scope.blogListPage = 1;
 		$scope.blogListLen = 5;
-		
+
 		$timeout(emitGet = function(){
 			$socketIo.emit('get-blog-list', {
 				cat: $root.section.href,
@@ -95,17 +90,31 @@ $(function(){
 				length: $scope.blogListLen
 			});
 		}, 200);
-			
-		
+
+
 		$scope.$on('socket:blog-list', function($e, data){
 			$scope.blogList = data.map(function(url){
 				return {
 					file: url,
-					url: $sce.trustAsResourceUrl('http://push.ezfr.d0t.co/blog/'+url)
+					url: '#/'+url,
+					summaryUrl: $sce.trustAsResourceUrl(
+						'http://push.ezfr.d0t.co/blog/' + url.replace(/\.md/,'').concat(".summary")
+					)
 				}
 			});
 			$scope.blogListPage += 1;
-		})
+		});
+		
+		$scope.getSummaryUrl = function( url ){
+			
+		}
+	}]);
+		
+	app.controller("BlogCtrl", ['$rootScope', '$scope', '$sce', '$socketIo', '$timeout', '$routeParams',
+	function($root, $scope, $sce, $socketIo, $timeout, $routeParams){
+		$scope.blog = {
+			url: $sce.trustAsResourceUrl('http://push.ezfr.d0t.co/blog/'+$routeParams.cat+'/'+$routeParams.file)
+		}
 	}]);
 	
 });

@@ -1,0 +1,5 @@
+<div class="blog-entry" ng-repeat="blog in blogList">
+	<div btf-markdown ng-include="blog.summaryUrl"></div>
+	<p></p>
+	<a href="/" ng-href="{{ blog.url }}">Read more</a>
+</div>
